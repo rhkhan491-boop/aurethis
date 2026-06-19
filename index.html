@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <meta name="description" content="AURETHIS — Precision. Presence. Performance. A premium digital identity crafting modern internet experiences.">
   <title>AURETHIS | Precision. Presence. Performance.</title>
   <!-- Fonts: Cormorant Garamond & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- GSAP, ScrollTrigger, Lenis -->
@@ -24,38 +24,49 @@
     }
   </script>
   <style>
-    /* Base & Luxury Reset */
+    /* Base & Ultra-Premium Reset */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #050505;
       color: #F5F5F5;
       cursor: none;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
     .luxury-serif {
       font-family: 'Cormorant Garamond', 'Bodoni Moda', serif;
     }
-    /* Custom Cursor - refined, confident */
-    .cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border: 1px solid rgba(212, 176, 106, 0.8);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-      transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.3s ease, height 0.3s ease, background-color 0.25s;
-      transform: translate(-50%, -50%);
+    /* Custom Cursor - refined, confident, hidden on touch devices */
+    @media (hover: hover) and (pointer: fine) {
+      .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgba(212, 176, 106, 0.8);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.3s ease, height 0.3s ease, background-color 0.25s;
+        transform: translate(-50%, -50%);
+      }
+      .cursor.hover {
+        width: 48px;
+        height: 48px;
+        background-color: rgba(212, 176, 106, 0.08);
+        border-color: #D4B06A;
+        mix-blend-mode: normal;
+      }
     }
-    .cursor.hover {
-      width: 48px;
-      height: 48px;
-      background-color: rgba(212, 176, 106, 0.08);
-      border-color: #D4B06A;
-      mix-blend-mode: normal;
+    @media (max-width: 768px), (pointer: coarse) {
+      .cursor {
+        display: none;
+      }
+      body {
+        cursor: auto;
+      }
     }
-    /* Grain overlay for texture */
+    /* Grain overlay */
     .grain {
       position: fixed;
       top: 0;
@@ -67,7 +78,7 @@
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
       opacity: 0.75;
     }
-    /* Loading screen - confident entrance */
+    /* Loading screen */
     .loader {
       position: fixed;
       inset: 0;
@@ -83,13 +94,13 @@
       visibility: hidden;
     }
     .letter-reveal {
-      font-size: clamp(3.5rem, 12vw, 8rem);
+      font-size: clamp(2.5rem, 10vw, 7rem);
       font-weight: 500;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.2em;
       color: #D4B06A;
       opacity: 0;
       display: inline-block;
-      text-shadow: 0 0 25px rgba(212,176,106,0.15);
+      text-shadow: 0 0 20px rgba(212,176,106,0.12);
     }
     /* Navigation */
     .nav-blur {
@@ -97,7 +108,7 @@
       background: rgba(5, 5, 5, 0.65);
       transition: background 0.5s ease, backdrop-filter 0.5s;
     }
-    /* Mobile menu overlay */
+    /* Mobile menu */
     .mobile-menu {
       background: #050505;
       transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.6s;
@@ -130,16 +141,25 @@
       display: flex;
       align-items: center;
       position: relative;
+      padding: 2rem;
     }
-    /* Lacoste-inspired confident typography */
+    @media (min-width: 768px) {
+      .narrative-panel {
+        padding: 4rem;
+      }
+    }
     .confident-text {
-      letter-spacing: 0.08em;
-      line-height: 1.1;
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+    }
+    /* Mobile optimized tap targets */
+    .mobile-link, a, button {
+      -webkit-tap-highlight-color: rgba(212,176,106,0.15);
     }
   </style>
 </head>
-<body class="bg-[#050505] text-[#F5F5F5] antialiased">
-  <!-- Custom cursor -->
+<body class="bg-[#050505] text-[#F5F5F5] antialiased selection:bg-[#D4B06A]/30 selection:text-[#F5F5F5]">
+  <!-- Custom cursor (hidden on mobile via CSS) -->
   <div class="cursor" id="cursor"></div>
   
   <!-- Grain texture -->
@@ -147,7 +167,7 @@
 
   <!-- Loading Screen -->
   <div class="loader" id="loader">
-    <div class="flex space-x-3 md:space-x-5" id="loader-text">
+    <div class="flex space-x-2 md:space-x-4" id="loader-text">
       <span class="letter-reveal">A</span>
       <span class="letter-reveal">U</span>
       <span class="letter-reveal">R</span>
@@ -160,28 +180,28 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 w-full z-50 py-6 px-8 md:px-14 flex justify-between items-center nav-blur" id="navbar">
-    <div class="text-xl md:text-2xl luxury-serif font-semibold tracking-[0.35em] text-[#D4B06A]">
+  <nav class="fixed top-0 left-0 w-full z-50 py-5 md:py-6 px-6 md:px-12 flex justify-between items-center nav-blur" id="navbar">
+    <div class="text-lg md:text-2xl luxury-serif font-semibold tracking-[0.3em] md:tracking-[0.35em] text-[#D4B06A]">
       AURETHIS
     </div>
-    <div class="hidden md:flex space-x-12 text-xs md:text-sm uppercase tracking-[0.25em] font-medium">
+    <div class="hidden md:flex space-x-10 lg:space-x-14 text-xs lg:text-sm uppercase tracking-[0.22em] font-medium">
       <a href="#philosophy" class="link-hover">Philosophy</a>
       <a href="#presence" class="link-hover">Presence</a>
       <a href="#connect" class="link-hover">Connect</a>
     </div>
-    <button class="md:hidden flex flex-col space-y-1.5 z-50 relative" id="menu-toggle">
-      <span class="block w-7 h-px bg-[#D4B06A] transition-transform duration-300"></span>
-      <span class="block w-7 h-px bg-[#D4B06A] transition-opacity duration-300"></span>
-      <span class="block w-7 h-px bg-[#D4B06A] transition-transform duration-300"></span>
+    <button class="md:hidden flex flex-col space-y-1.5 z-50 relative p-2" id="menu-toggle" aria-label="Menu">
+      <span class="block w-6 h-px bg-[#D4B06A] transition-transform duration-300"></span>
+      <span class="block w-6 h-px bg-[#D4B06A] transition-opacity duration-300"></span>
+      <span class="block w-6 h-px bg-[#D4B06A] transition-transform duration-300"></span>
     </button>
   </nav>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu fixed inset-0 z-40 flex flex-col items-center justify-center opacity-0 invisible" id="mobile-menu">
-    <div class="flex flex-col space-y-12 text-4xl luxury-serif text-[#D4B06A] tracking-widest">
-      <a href="#philosophy" class="mobile-link link-hover">Philosophy</a>
-      <a href="#presence" class="mobile-link link-hover">Presence</a>
-      <a href="#connect" class="mobile-link link-hover">Connect</a>
+    <div class="flex flex-col space-y-10 text-4xl luxury-serif text-[#D4B06A] tracking-widest">
+      <a href="#philosophy" class="mobile-link link-hover py-3">Philosophy</a>
+      <a href="#presence" class="mobile-link link-hover py-3">Presence</a>
+      <a href="#connect" class="mobile-link link-hover py-3">Connect</a>
     </div>
   </div>
 
@@ -190,20 +210,20 @@
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="hero">
       <div id="hero-canvas"></div>
       
-      <div class="relative z-20 text-center px-6 md:px-12 pointer-events-none">
-        <h1 class="luxury-serif text-7xl md:text-9xl lg:text-[10rem] font-semibold tracking-[0.12em] text-[#F5F5F5] mb-6 opacity-0 confident-text" id="hero-title">
+      <div class="relative z-20 text-center px-4 sm:px-6 md:px-12 pointer-events-none w-full max-w-4xl mx-auto">
+        <h1 class="luxury-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-semibold tracking-[0.08em] sm:tracking-[0.1em] md:tracking-[0.12em] text-[#F5F5F5] mb-4 sm:mb-6 opacity-0 confident-text" id="hero-title">
           AURETHIS
         </h1>
-        <div class="space-y-1 md:space-y-2 mb-12 opacity-0" id="hero-taglines">
-          <p class="text-lg md:text-2xl font-light tracking-[0.4em] text-[#D4B06A]">Precision.</p>
-          <p class="text-lg md:text-2xl font-light tracking-[0.4em] text-[#D4B06A]">Presence.</p>
-          <p class="text-lg md:text-2xl font-light tracking-[0.4em] text-[#D4B06A]">Performance.</p>
+        <div class="space-y-0 sm:space-y-1 md:space-y-2 mb-8 sm:mb-10 md:mb-12 opacity-0" id="hero-taglines">
+          <p class="text-base sm:text-lg md:text-2xl font-light tracking-[0.3em] sm:tracking-[0.35em] md:tracking-[0.4em] text-[#D4B06A]">Precision.</p>
+          <p class="text-base sm:text-lg md:text-2xl font-light tracking-[0.3em] sm:tracking-[0.35em] md:tracking-[0.4em] text-[#D4B06A]">Presence.</p>
+          <p class="text-base sm:text-lg md:text-2xl font-light tracking-[0.3em] sm:tracking-[0.35em] md:tracking-[0.4em] text-[#D4B06A]">Performance.</p>
         </div>
-        <p class="text-sm md:text-base font-light tracking-[0.3em] text-[#F5F5F5]/60 mb-14 max-w-xl mx-auto opacity-0" id="hero-subtext">
+        <p class="text-xs sm:text-sm md:text-base font-light tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-[#F5F5F5]/60 mb-10 sm:mb-12 md:mb-14 max-w-md sm:max-w-lg md:max-w-xl mx-auto px-2 opacity-0" id="hero-subtext">
           Crafting Digital Presence For The Modern Internet
         </p>
         <div class="opacity-0" id="hero-cta">
-          <a href="#philosophy" class="inline-block px-12 py-5 border border-[#D4B06A]/50 text-[#D4B06A] uppercase tracking-[0.3em] text-sm font-medium hover:bg-[#D4B06A]/10 transition-all duration-500 pointer-events-auto">
+          <a href="#philosophy" class="inline-block px-8 sm:px-10 md:px-12 py-4 sm:py-5 border border-[#D4B06A]/50 text-[#D4B06A] uppercase tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] text-xs sm:text-sm font-medium hover:bg-[#D4B06A]/10 active:bg-[#D4B06A]/20 transition-all duration-500 pointer-events-auto">
             Enter Presence
           </a>
         </div>
@@ -213,48 +233,48 @@
     <!-- NARRATIVE STORYTELLING -->
     
     <!-- Precision Screen -->
-    <section class="narrative-panel bg-[#050505] px-8 md:px-24" id="precision">
+    <section class="narrative-panel bg-[#050505]" id="precision">
       <div class="max-w-7xl mx-auto w-full">
-        <h2 class="luxury-serif text-7xl md:text-9xl lg:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-10 confident-text reveal-text">
+        <h2 class="luxury-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-6 sm:mb-8 md:mb-10 confident-text reveal-text">
           Precision<span class="text-[#D4B06A]">.</span>
         </h2>
-        <p class="text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-2xl leading-relaxed tracking-wide reveal-text">
+        <p class="text-lg sm:text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-xl sm:max-w-2xl leading-relaxed tracking-wide reveal-text">
           Every detail considered. Every interaction refined. Nothing exists without intention.
         </p>
       </div>
     </section>
 
     <!-- Presence Screen -->
-    <section class="narrative-panel bg-[#0D0D0D] px-8 md:px-24" id="presence-story">
-      <div class="max-w-7xl mx-auto w-full text-right">
-        <h2 class="luxury-serif text-7xl md:text-9xl lg:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-10 confident-text reveal-text">
+    <section class="narrative-panel bg-[#0D0D0D]" id="presence-story">
+      <div class="max-w-7xl mx-auto w-full text-left md:text-right">
+        <h2 class="luxury-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-6 sm:mb-8 md:mb-10 confident-text reveal-text">
           Presence<span class="text-[#D4B06A]">.</span>
         </h2>
-        <p class="text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-2xl ml-auto leading-relaxed tracking-wide reveal-text">
+        <p class="text-lg sm:text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-xl sm:max-w-2xl md:ml-auto leading-relaxed tracking-wide reveal-text">
           A commanding identity that resonates beyond the screen. Unforgettable.
         </p>
       </div>
     </section>
 
     <!-- Performance Screen -->
-    <section class="narrative-panel bg-[#050505] px-8 md:px-24" id="performance-story">
+    <section class="narrative-panel bg-[#050505]" id="performance-story">
       <div class="max-w-7xl mx-auto w-full">
-        <h2 class="luxury-serif text-7xl md:text-9xl lg:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-10 confident-text reveal-text">
+        <h2 class="luxury-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-semibold tracking-wide text-[#F5F5F5] mb-6 sm:mb-8 md:mb-10 confident-text reveal-text">
           Performance<span class="text-[#D4B06A]">.</span>
         </h2>
-        <p class="text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-2xl leading-relaxed tracking-wide reveal-text">
+        <p class="text-lg sm:text-xl md:text-3xl font-light text-[#F5F5F5]/70 max-w-xl sm:max-w-2xl leading-relaxed tracking-wide reveal-text">
           Seamless motion. Flawless execution. Engineered for impact.
         </p>
       </div>
     </section>
 
     <!-- Philosophy Section -->
-    <section id="philosophy" class="relative py-40 md:py-60 px-8 md:px-24 bg-[#0D0D0D]">
+    <section id="philosophy" class="relative py-24 sm:py-32 md:py-40 lg:py-60 px-6 sm:px-10 md:px-16 lg:px-24 bg-[#0D0D0D]">
       <div class="max-w-6xl mx-auto">
-        <h2 class="luxury-serif text-6xl md:text-8xl font-semibold tracking-wide text-[#F5F5F5] mb-20 reveal-text confident-text">
-          Designed With <br class="hidden md:block"><span class="text-[#D4B06A]">Intention</span>
+        <h2 class="luxury-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold tracking-wide text-[#F5F5F5] mb-12 sm:mb-16 md:mb-20 reveal-text confident-text">
+          Designed With <br class="hidden sm:block"><span class="text-[#D4B06A]">Intention</span>
         </h2>
-        <div class="grid md:grid-cols-2 gap-16 md:gap-24 text-[#F5F5F5]/80 font-light text-lg md:text-2xl leading-relaxed tracking-wide">
+        <div class="grid md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-24 text-[#F5F5F5]/80 font-light text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed tracking-wide">
           <p class="reveal-text">
             Digital craftsmanship is not a feature; it is the foundation. We sculpt identities that embody refinement and purpose.
           </p>
@@ -266,27 +286,27 @@
     </section>
 
     <!-- Presence Section (Visual Storytelling) -->
-    <section id="presence" class="relative py-40 md:py-60 px-8 md:px-24 bg-[#050505]">
+    <section id="presence" class="relative py-24 sm:py-32 md:py-40 lg:py-60 px-6 sm:px-10 md:px-16 lg:px-24 bg-[#050505]">
       <div class="max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-20 items-center">
-          <div class="space-y-12 reveal-text">
-            <h3 class="luxury-serif text-5xl md:text-7xl font-semibold tracking-wide">Modern Identity</h3>
-            <p class="text-[#F5F5F5]/70 text-xl font-light leading-loose">
+        <div class="grid md:grid-cols-2 gap-12 sm:gap-16 md:gap-20 items-center">
+          <div class="space-y-6 sm:space-y-8 md:space-y-12 reveal-text">
+            <h3 class="luxury-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-wide">Modern Identity</h3>
+            <p class="text-[#F5F5F5]/70 text-base sm:text-lg md:text-xl font-light leading-loose">
               A fusion of artistry and technology. Your digital essence, refined to its most powerful form.
             </p>
           </div>
-          <div class="h-80 md:h-[32rem] bg-gradient-to-br from-[#141414] to-[#0A0A0A] border border-[#D4B06A]/10 flex items-center justify-center reveal-text">
-            <span class="text-9xl luxury-serif text-[#D4B06A]/15">◈</span>
+          <div class="h-56 sm:h-72 md:h-80 lg:h-[32rem] bg-gradient-to-br from-[#141414] to-[#0A0A0A] border border-[#D4B06A]/10 flex items-center justify-center reveal-text order-first md:order-last">
+            <span class="text-6xl sm:text-8xl md:text-9xl luxury-serif text-[#D4B06A]/15">◈</span>
           </div>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-20 items-center mt-36 md:mt-60">
-          <div class="order-2 md:order-1 h-80 md:h-[32rem] bg-gradient-to-bl from-[#141414] to-[#0A0A0A] border border-[#D4B06A]/10 flex items-center justify-center reveal-text">
-            <span class="text-9xl luxury-serif text-[#D4B06A]/15">⟡</span>
+        <div class="grid md:grid-cols-2 gap-12 sm:gap-16 md:gap-20 items-center mt-20 sm:mt-28 md:mt-36 lg:mt-60">
+          <div class="h-56 sm:h-72 md:h-80 lg:h-[32rem] bg-gradient-to-bl from-[#141414] to-[#0A0A0A] border border-[#D4B06A]/10 flex items-center justify-center reveal-text">
+            <span class="text-6xl sm:text-8xl md:text-9xl luxury-serif text-[#D4B06A]/15">⟡</span>
           </div>
-          <div class="space-y-12 order-1 md:order-2 reveal-text">
-            <h3 class="luxury-serif text-5xl md:text-7xl font-semibold tracking-wide">Curated Atmosphere</h3>
-            <p class="text-[#F5F5F5]/70 text-xl font-light leading-loose">
+          <div class="space-y-6 sm:space-y-8 md:space-y-12 reveal-text">
+            <h3 class="luxury-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-wide">Curated Atmosphere</h3>
+            <p class="text-[#F5F5F5]/70 text-base sm:text-lg md:text-xl font-light leading-loose">
               Beyond visibility — an aura that commands attention. We build environments that leave a mark.
             </p>
           </div>
@@ -295,20 +315,20 @@
     </section>
 
     <!-- Connect Section -->
-    <section id="connect" class="relative py-40 md:py-60 px-8 md:px-24 bg-[#0D0D0D]">
+    <section id="connect" class="relative py-24 sm:py-32 md:py-40 lg:py-60 px-6 sm:px-10 md:px-16 lg:px-24 bg-[#0D0D0D]">
       <div class="max-w-5xl mx-auto text-center">
-        <h2 class="luxury-serif text-6xl md:text-8xl font-semibold tracking-wide mb-24 reveal-text confident-text">Connect</h2>
-        <div class="grid md:grid-cols-2 gap-12 md:gap-24">
-          <a href="https://instagram.com/not_your_rahi_" target="_blank" rel="noopener" class="group block p-12 md:p-16 border border-[#D4B06A]/20 hover:border-[#D4B06A]/50 transition-all duration-700 bg-[#141414]/40 hover:bg-[#141414] reveal-text">
-            <p class="text-sm uppercase tracking-[0.35em] text-[#D4B06A] mb-6">Instagram</p>
-            <p class="text-2xl md:text-4xl luxury-serif text-[#F5F5F5] group-hover:text-[#D4B06A] transition-colors">@not_your_rahi_</p>
+        <h2 class="luxury-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold tracking-wide mb-16 sm:mb-20 md:mb-24 reveal-text confident-text">Connect</h2>
+        <div class="grid sm:grid-cols-2 gap-8 sm:gap-10 md:gap-16 lg:gap-24">
+          <a href="https://instagram.com/not_your_rahi_" target="_blank" rel="noopener" class="group block p-8 sm:p-10 md:p-12 lg:p-16 border border-[#D4B06A]/20 hover:border-[#D4B06A]/50 active:border-[#D4B06A]/70 transition-all duration-700 bg-[#141414]/40 hover:bg-[#141414] reveal-text">
+            <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[#D4B06A] mb-4 sm:mb-6">Instagram</p>
+            <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl luxury-serif text-[#F5F5F5] group-hover:text-[#D4B06A] transition-colors break-all">@not_your_rahi_</p>
           </a>
-          <a href="https://t.me/itzdevrahi" target="_blank" rel="noopener" class="group block p-12 md:p-16 border border-[#D4B06A]/20 hover:border-[#D4B06A]/50 transition-all duration-700 bg-[#141414]/40 hover:bg-[#141414] reveal-text">
-            <p class="text-sm uppercase tracking-[0.35em] text-[#D4B06A] mb-6">Telegram</p>
-            <p class="text-2xl md:text-4xl luxury-serif text-[#F5F5F5] group-hover:text-[#D4B06A] transition-colors">@itzdevrahi</p>
+          <a href="https://t.me/itzdevrahi" target="_blank" rel="noopener" class="group block p-8 sm:p-10 md:p-12 lg:p-16 border border-[#D4B06A]/20 hover:border-[#D4B06A]/50 active:border-[#D4B06A]/70 transition-all duration-700 bg-[#141414]/40 hover:bg-[#141414] reveal-text">
+            <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[#D4B06A] mb-4 sm:mb-6">Telegram</p>
+            <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl luxury-serif text-[#F5F5F5] group-hover:text-[#D4B06A] transition-colors break-all">@itzdevrahi</p>
           </a>
         </div>
-        <p class="mt-28 text-[#F5F5F5]/30 text-sm tracking-widest reveal-text">AURETHIS — Precision. Presence. Performance.</p>
+        <p class="mt-20 sm:mt-24 md:mt-28 text-[#F5F5F5]/30 text-xs sm:text-sm tracking-widest reveal-text">AURETHIS — Precision. Presence. Performance.</p>
       </div>
     </section>
   </main>
@@ -317,18 +337,20 @@
     import * as THREE from 'three';
     
     // ------------------------------------------------------------
-    // CUSTOM CURSOR
+    // CUSTOM CURSOR (only on non-touch devices)
     // ------------------------------------------------------------
     const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    const hoverElements = document.querySelectorAll('a, button, .mobile-link');
-    hoverElements.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+    if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      const hoverElements = document.querySelectorAll('a, button, .mobile-link');
+      hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
     
     // ------------------------------------------------------------
     // LOADING SEQUENCE
@@ -339,14 +361,14 @@
     window.addEventListener('load', () => {
       gsap.to(letters, {
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.7,
+        stagger: 0.09,
         ease: 'power3.out',
         onComplete: () => {
           gsap.to(loader, {
             opacity: 0,
-            duration: 1,
-            delay: 0.7,
+            duration: 0.9,
+            delay: 0.6,
             ease: 'power2.inOut',
             onComplete: () => {
               loader.classList.add('hidden');
@@ -359,10 +381,10 @@
     
     function animateHero() {
       const tl = gsap.timeline();
-      tl.to('#hero-title', { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' })
-        .to('#hero-taglines', { opacity: 1, y: 0, duration: 1.1, stagger: 0.25, ease: 'power2.out' }, '-=0.6')
-        .to('#hero-subtext', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.5')
-        .to('#hero-cta', { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.4');
+      tl.to('#hero-title', { opacity: 1, y: 0, duration: 1.3, ease: 'power3.out' })
+        .to('#hero-taglines', { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power2.out' }, '-=0.5')
+        .to('#hero-subtext', { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.4')
+        .to('#hero-cta', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3');
     }
     
     // ------------------------------------------------------------
@@ -395,12 +417,14 @@
     });
     
     // ------------------------------------------------------------
-    // LENIS SMOOTH SCROLL
+    // LENIS SMOOTH SCROLL (optimized for mobile)
     // ------------------------------------------------------------
     const lenis = new Lenis({
-      duration: 1.6,
+      duration: window.innerWidth < 768 ? 1.2 : 1.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 2,
     });
     
     function raf(time) {
@@ -422,15 +446,15 @@
     const revealElements = document.querySelectorAll('.reveal-text');
     revealElements.forEach(el => {
       gsap.fromTo(el, 
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 1.3,
+          duration: 1.2,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 88%',
+            start: 'top 90%',
             toggleActions: 'play none none none',
           }
         }
@@ -438,13 +462,18 @@
     });
     
     // ------------------------------------------------------------
-    // THREE.JS CUSTOM METALLIC SCULPTURE (Lacoste confidence)
+    // THREE.JS CUSTOM METALLIC SCULPTURE (responsive)
     // ------------------------------------------------------------
     const canvasContainer = document.getElementById('hero-canvas');
     const scene = new THREE.Scene();
     
-    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 5.5;
+    const camera = new THREE.PerspectiveCamera(
+      window.innerWidth < 768 ? 50 : 42,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      100
+    );
+    camera.position.z = window.innerWidth < 768 ? 6 : 5.5;
     
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true, 
@@ -469,10 +498,9 @@
     rimLight.position.set(-1.2, 0.7, -2);
     scene.add(rimLight);
     
-    // Custom Sculpture: confident, organic, refined
+    // Custom Sculpture
     const sculptureGroup = new THREE.Group();
     
-    // Main geometry - distorted octahedron for a sharp, premium look
     const geometry = new THREE.OctahedronGeometry(1.05, 1);
     const posAttr = geometry.attributes.position;
     
@@ -504,7 +532,6 @@
     const core = new THREE.Mesh(geometry, material);
     sculptureGroup.add(core);
     
-    // Subtle inner wireframe for depth
     const wireGeo = new THREE.OctahedronGeometry(1.12, 1);
     const wireMat = new THREE.MeshBasicMaterial({
       color: 0xD4B06A,
@@ -517,9 +544,9 @@
     
     scene.add(sculptureGroup);
     
-    // Floating particles
+    // Particles
     const particlesGeo = new THREE.BufferGeometry();
-    const particlesCount = 600;
+    const particlesCount = window.innerWidth < 768 ? 300 : 600;
     const posArray = new Float32Array(particlesCount * 3);
     
     for (let i = 0; i < particlesCount * 3; i += 3) {
@@ -555,6 +582,12 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      if (window.innerWidth < 768) {
+        camera.position.z = 6;
+      } else {
+        camera.position.z = 5.5;
+      }
     });
     
     function animateScene() {
@@ -577,7 +610,7 @@
     // Navigation background update
     const navbar = document.getElementById('navbar');
     lenis.on('scroll', ({ scroll }) => {
-      if (scroll > 70) {
+      if (scroll > 60) {
         navbar.style.background = 'rgba(5,5,5,0.8)';
         navbar.style.backdropFilter = 'blur(20px)';
       } else {
